@@ -15,3 +15,6 @@ doc:
 	#go doc main
 wrk: 
 	go-wrk -d 5 http://localhost:8080/github.com/scristofari/golang-poll
+cover:
+	go test -coverprofile cover.out
+	go tool cover -html=cover.out -o cover.html
