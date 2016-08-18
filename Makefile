@@ -1,20 +1,26 @@
-# Helper for runnig the app
-APP_IMAGE_NAME := golang-helloworld-app
-APP_CONTAINER_NAME := helloword
+##### Docker #####
+APP_IMAGE_NAME := golang-qa-sandbox
+APP_CONTAINER_NAME := sandox
 
-clean:
+docker-clean:
 	docker stop $$(docker ps -a -q)
 	docker rm $$(docker ps -a -q)
-build:
+docker-build:
 	docker build -t $(APP_IMAGE_NAME) .
-run: build
-	docker run -it --rm -p 8080:8080 -v "$$PWD":/go/src/helloworld --name $(APP_CONTAINER_NAME) $(APP_IMAGE_NAME)
-list:
+docker-run: docker-build
+	docker run -it --rm -p 8080:8080 -v "$$PWD":/go/src/golang-qa-sandbox --name $(APP_CONTAINER_NAME) $(APP_IMAGE_NAME)
+
+#### APP ######
+BUILD_DIR := ./build
+
+clean:
+	rm -R build/*
+list-imports:
 	go list -f '{{ join .Imports "\n" }}'
 doc:
 	#go doc main
 wrk: 
-	go-wrk -d 5 http://localhost:8080/github.com/scristofari/golang-poll
-cover:
-	go test -coverprofile cover.out
-	go tool cover -html=cover.out -o cover.html
+	go-wrk -d 5 http://localhost:8080/github.com/scristofari/golang-qa-sandbox
+cover: clean
+	go test -coverprofile $(BUILD_DIR)/cover.out
+	go tool cover -html=$(BUILD_DIR)/cover.out -o $(BUILD_DIR)/cover.html

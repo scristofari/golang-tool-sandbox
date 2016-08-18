@@ -4,7 +4,7 @@ MAINTAINER Sylvain Cristofari <s.cristofari@gmail.com>
 
 RUN apk update && apk add bash git make
 
-WORKDIR /go/src/helloworld
+WORKDIR /go/src/golang-qa-sandbox
 
 RUN go get github.com/tools/godep
 
