@@ -6,26 +6,27 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	_ "net/http/pprof"
-
-	"github.com/julienschmidt/httprouter"
 )
 
-func hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Fprintf(w, "Hello %s, you have a project named %s on %s !",
-		ps.ByName("username"),
-		ps.ByName("project"),
-		ps.ByName("domain"),
-	)
-}
-
 func main() {
-	router := httprouter.New()
-	router.GET("/:domain/:username/:project", hello)
+	http.HandleFunc("/", hello)
 
 	port := os.Getenv("APP_PORT")
 	log.Println(fmt.Sprintf("Serving on port '%s'.", port))
 
-	log.Fatal(http.ListenAndServe(":"+port, router))
+	log.Fatal(http.ListenAndServe(":"+port, nil))
+}
+
+func hello(w http.ResponseWriter, r *http.Request) {
+	hash := strings.Split(r.URL.Path, "/")
+
+	if len(hash) == 3 && hash[1] == "hello" {
+		fmt.Fprintf(w, "Hello, %s !", hash[2])
+		return
+	}
+
+	http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 }
