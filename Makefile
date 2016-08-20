@@ -38,3 +38,7 @@ torch:
 	go-torch -t 5 --print > $(BUILD_DIR)/torch.svg
 bench:
 	go test -bench .
+bench-profile:
+	go test -bench . -cpuprofile=$(BUILD_DIR)/prof.cpu -o $(BUILD_DIR)/golang-tool-sandbox.test
+torch-profile: bench-profile
+	go-torch --binaryname $(BUILD_DIR)/golang-tool-sandbox.test -b $(BUILD_DIR)/prof.cpu --print > $(BUILD_DIR)/torch-profile.svg
