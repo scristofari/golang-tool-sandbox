@@ -38,3 +38,28 @@ func TestHello(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkHello(b *testing.B) {
+
+	for i := 0; i < b.N; i++ {
+
+		req, _ := http.NewRequest(
+			http.MethodGet,
+			"http://localhost:8080/hello/scristofari",
+			nil,
+		)
+
+		rec := httptest.NewRecorder()
+
+		hello(rec, req)
+
+		if rec.Code != 200 {
+			b.Errorf("Expected %d, get %d", 200, rec.Code)
+		}
+
+		body := strings.TrimSpace(rec.Body.String())
+		if body != "Hello, scristofari !" {
+			b.Errorf("Unexpected body, expected %s, got %s", "Hello, scristofari !", body)
+		}
+	}
+}
