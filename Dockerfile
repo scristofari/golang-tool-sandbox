@@ -7,7 +7,6 @@ RUN git clone --depth=1 https://github.com/brendangregg/FlameGraph.git /opt/flam
 
 WORKDIR /go/src/golang-tool-sandbox
 
-# QA
 RUN go get github.com/uber/go-torch
 RUN go get github.com/tsliwowicz/go-wrk
 

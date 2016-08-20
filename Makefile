@@ -26,7 +26,7 @@ doc:
 	#go doc main
 wrk:
 	go-wrk -d 20 http://localhost:8080/hello/scristofari
-cover: clean
+cover:
 	go test -coverprofile $(BUILD_DIR)/cover.out
 	go tool cover -html=$(BUILD_DIR)/cover.out -o $(BUILD_DIR)/cover.html
 pprof:
@@ -42,3 +42,4 @@ bench-profile:
 	go test -bench . -cpuprofile=$(BUILD_DIR)/prof.cpu -o $(BUILD_DIR)/golang-tool-sandbox.test
 torch-profile: bench-profile
 	go-torch --binaryname $(BUILD_DIR)/golang-tool-sandbox.test -b $(BUILD_DIR)/prof.cpu --print > $(BUILD_DIR)/torch-profile.svg
+all: clean cover torch-profile
