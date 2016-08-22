@@ -24,9 +24,11 @@ func hello(w http.ResponseWriter, r *http.Request) {
 	hash := strings.Split(r.URL.Path, "/")
 
 	if len(hash) == 3 && hash[1] == "hello" {
+		w.Header().Set("Content-Type", "text/html")
 		fmt.Fprintf(w, "Hello, %s !", hash[2])
 		return
 	}
 
 	http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+	return
 }
