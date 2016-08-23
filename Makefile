@@ -21,9 +21,10 @@ clean:
 list-imports:
 	go list -f '{{ join .Imports "\n" }}'
 wrk:
-	# go run main.go
+	go run main.go &
+	sleep 3
 	go-wrk -d 10 http://localhost:8080/hello/scristofari
-	# kill $!
+	kill -9 -$$(ps -o pgid= $$PID | grep -o '[0-9]*')
 cover:
 	go test -coverprofile $(BUILD_DIR)/cover.out
 	go tool cover -html=$(BUILD_DIR)/cover.out -o $(BUILD_DIR)/cover.html
