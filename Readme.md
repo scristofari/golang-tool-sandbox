@@ -1,4 +1,4 @@
-# Test some tools of golang. 
+# Test tools
 
 ### The app :
 Just a simple helloworld.
@@ -42,8 +42,7 @@ go test -bench . -cpuprofile=$(BUILD_DIR)/prof.cpu -o $(BUILD_DIR)/golang-tool-s
 go-torch --binaryname $(BUILD_DIR)/golang-tool-sandbox.test -b $(BUILD_DIR)/prof.cpu --print > $(BUILD_DIR)/torch-profile.svg
 ```
 
-![profile](https://github.com/scristofari/golang-qa-sandbox/blob/master/build/torch-profile.svg)
-
+[![Profile](https://github.com/scristofari/golang-qa-sandbox/blob/master/build/torch-profile.svg)](https://github.com/scristofari/golang-qa-sandbox/blob/master/build/torch-profile.svg
 ### [metalinter - Concurrently run Go lint tools and normalise their output](https://github.com/alecthomas/gometalinter) :
 
 ```bash
