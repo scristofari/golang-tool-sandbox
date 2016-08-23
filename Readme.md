@@ -1,11 +1,11 @@
 # Test some tools of golang. 
 
-### The app
+### The app :
 Just a simple helloworld.
 
 main.go
 
-### Unit Test - Bench Test
+### Unit Test - Bench Test :
 
 main_test.go
 
@@ -14,7 +14,7 @@ go test .
 go test -bench .
 ```
 
-### Coverage
+### Coverage :
 
 ```bash
 go test -coverprofile $(BUILD_DIR)/cover.out
@@ -33,7 +33,7 @@ Fastest Request:       	37.853µs
 Slowest Request:       	96.938606ms
 ```
 
-### [go-torch / pprof / Flamegraph](https://github.com/uber/go-torch)
+### [go-torch / pprof / Flamegraph](https://github.com/uber/go-torch) :
 
 Generate a SVG of your handlers.
 
@@ -42,9 +42,9 @@ go test -bench . -cpuprofile=$(BUILD_DIR)/prof.cpu -o $(BUILD_DIR)/golang-tool-s
 go-torch --binaryname $(BUILD_DIR)/golang-tool-sandbox.test -b $(BUILD_DIR)/prof.cpu --print > $(BUILD_DIR)/torch-profile.svg
 ```
 
-torch-profile.svg
+![profile](https://github.com/scristofari/golang-qa-sandbox/blob/master/build/torch-profile.svg)
 
-### [metalinter - Concurrently run Go lint tools and normalise their output](https://github.com/alecthomas/gometalinter)
+### [metalinter - Concurrently run Go lint tools and normalise their output](https://github.com/alecthomas/gometalinter) :
 
 ```bash
 gometalinter --deadline=1m --cyclo-over=20 --tests --json . > $(BUILD_DIR)/linter.json
