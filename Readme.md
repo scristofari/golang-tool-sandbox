@@ -1,13 +1,11 @@
-## Test some tools of golang.
+# Test some tools of golang. 
 
-The makefile : 
-
-# The app
+### The app
 Just a simple helloworld.
 
 main.go
 
-# Unit Test - Bench Test
+### Unit Test - Bench Test
 
 main_test.go
 
@@ -16,15 +14,14 @@ go test .
 go test -bench .
 ```
 
-# Coverage
+### Coverage
 
 ```bash
 go test -coverprofile $(BUILD_DIR)/cover.out
 go tool cover -html=$(BUILD_DIR)/cover.out -o $(BUILD_DIR)/cover.html
 ```
 
-# go-wrk - an HTTP benchmarking tool :
-[go-wrk](https://github.com/tsliwowicz/go-wrk)
+### [go-wrk - an HTTP benchmarking tool](https://github.com/tsliwowicz/go-wrk) :
 
 ```bash
 go-wrk -d 10 http://localhost:8080/hello/scristofari
@@ -36,8 +33,7 @@ Fastest Request:       	37.853µs
 Slowest Request:       	96.938606ms
 ```
 
-# go-torch / pprof / Flamegraph
-[go-torch](https://github.com/uber/go-torch)
+### [go-torch / pprof / Flamegraph](https://github.com/uber/go-torch)
 
 Generate a SVG of your handlers.
 
@@ -48,8 +44,7 @@ go-torch --binaryname $(BUILD_DIR)/golang-tool-sandbox.test -b $(BUILD_DIR)/prof
 
 torch-profile.svg
 
-# metalinter - Concurrently run Go lint tools and normalise their output
-[metalinter](https://github.com/alecthomas/gometalinter)
+### [metalinter - Concurrently run Go lint tools and normalise their output](https://github.com/alecthomas/gometalinter)
 
 ```bash
 gometalinter --deadline=1m --cyclo-over=20 --tests --json . > $(BUILD_DIR)/linter.json
